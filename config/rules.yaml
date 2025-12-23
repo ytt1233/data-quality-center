@@ -1,0 +1,58 @@
+version: 1.0
+
+dataset: job_listings
+
+rules:
+  # - name: salary_range_check
+  #   field: salary
+  #   type: range
+  #   min: 1000
+  #   max: 100000
+  #   enabled:   
+  #   level: error    # error/warning/info
+  #   weight: 5
+
+  - name: salary_format_check
+    field: salary_raw
+    type: regex
+    pattern: ^\d+(\.\d+)?-\d+(\.\d+)?(万|元)(·\d+薪)?$
+    enabled: true
+    level: warning
+    weight: 5
+
+  # - name: city_not_null
+  #   field: city
+  #   type: not_null
+  #   enabled: true
+  #   level: error
+  #   weight: 5
+
+  - name: position_not_null
+    field: position
+    type: not_null
+    enabled: true
+    level: error
+    weight: 6
+
+  # - name: publish_date_valid
+  #   field: publish_date
+  #   type: date
+  #   format: "%Y-%m-%d"
+  #   enabled: true
+  #   level: warning
+  #   weight: 5
+
+  - name: skill_list_not_empty
+    field: skills
+    type: length_min
+    min: 1  
+    enabled: true
+    level: warning
+    weight: 4
+
+  # - name: company_name_not_null
+  #   field: company_name
+  #   type: not_null
+  #   enabled: true
+  #   level: error
+  #   weight: 5 

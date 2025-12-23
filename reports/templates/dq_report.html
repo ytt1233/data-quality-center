@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Data Quality Report</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        h1 { color: #333; }
+        .passed { color: green; }
+        .warning { color: orange; }
+        .rejected { color: red; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+<h1>📊 Data Quality Report</h1>
+
+<h2>Summary</h2>
+<ul>
+    <li><b>DQ Score:</b> {{ dq_score }}</li>
+    <li><b>Gate Status:</b>
+        <span class="{{ gate_status|lower }}">{{ gate_status }}</span>
+    </li>
+    <li><b>Generated At:</b> {{ generated_at }}</li>
+</ul>
+
+<h2>Rule Details</h2>
+<table>
+    <tr>
+        <th>Rule Name</th>
+        <th>Level</th>
+        <th>Checked</th>
+        <th>Failed</th>
+        <th>Pass Rate</th>
+    </tr>
+    {% for r in rule_results %}
+    <tr>
+        <td>{{ r.rule }}</td>
+        <td>{{ r.level }}</td>
+        <td>{{ r.total_count }}</td>
+        <td>{{ r.failed_count }}</td>
+        <td>{{ r.pass_rate }}%</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Conclusion</h2>
+<p>
+{% if gate_status == "PASSED" %}
+✅ Data quality check passed. Data can be loaded into warehouse.
+{% elif gate_status == "WARNING" %}
+⚠️ Data quality has warnings. Please review before downstream usage.
+{% else %}
+❌ Data quality check failed. Data is blocked by Quality Gate.
+{% endif %}
+</p>
+
+</body>
+</html>
