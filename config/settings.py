@@ -1,5 +1,5 @@
 class Settings:
-    DATA_PATH = 'data/jobs_clean.csv'
+    DATA_PATH = 'data/sample/jobs_sample.csv'
     RESULT_PATH = 'data/dq_result.csv'
     RULE_FILE = "config/rules.yaml"
     DQ_SCORE_THRESHOLD = 0.9
