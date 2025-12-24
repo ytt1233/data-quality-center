@@ -46,8 +46,7 @@ data/**/*.csv
 # ===============================
 # Reports (DQ reports)
 # ===============================
-reports/output/
-reports/*.html
+reports/output/*.html
 
 # ===============================
 # Cache / Temp
